@@ -1,9 +1,9 @@
-interface QueryGenerator {
+interface IQueryGenerator {
   getReadingQuery: () => string;
   getWritingQuery: (data: string) => string;
 }
   
-class MySql implements QueryGenerator {
+class MySql implements IQueryGenerator {
   getReadingQuery() {
     return "SELECT * FROM MySQL";
   }
@@ -13,7 +13,7 @@ class MySql implements QueryGenerator {
   }
 }
   
-class Redis implements QueryGenerator {
+class Redis implements IQueryGenerator {
   getReadingQuery() {
     return "SCAN 0";
   }
@@ -25,7 +25,7 @@ class Redis implements QueryGenerator {
 
 // now code open to adding new databases close to change App class code
 class App {
-    constructor( private queryService: QueryGenerator ){};
+    constructor( private queryService: IQueryGenerator ){};
     readQuery(){
         return this.queryService.getReadingQuery();
     }
